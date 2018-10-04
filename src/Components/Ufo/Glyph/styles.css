@@ -3,20 +3,17 @@
 }
 
 .baseline {
-
-    stroke: red;
-    stroke-width: 1;
-    vector-effect: non-scaling-stroke;
+  stroke: red;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
 }
 
 .right,
 .left {
-
-    stroke: gray;
-    stroke-width: 1;
-    vector-effect: non-scaling-stroke;
+  stroke: gray;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
 }
-
 
 .Glyph--svg {
   width: 100%;

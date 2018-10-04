@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Dropzone from "react-dropzone";
 import { getDroppedOrSelectedFiles } from "html5-file-selector";
 
-class FolderExample extends React.Component {
+class FolderExample extends Component {
   constructor() {
     super();
     this.state = { files: [] };

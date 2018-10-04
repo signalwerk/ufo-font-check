@@ -2,6 +2,7 @@ import { contents, gGlif, fontinfo } from "./testufo.js";
 import plist from "plist";
 const xml2js = require("xml2js");
 const R = require("ramda");
+const uuidv4 = require("uuid/v4");
 
 var parser = new xml2js.Parser({
   preserveChildrenOrder: true
@@ -21,7 +22,6 @@ class UfoReader {
     return plist.parse(fontinfo);
   }
   getGlyph(filename) {
-    let glyph;
     var xml = gGlif;
 
     let data = null,
@@ -49,6 +49,7 @@ class Ufo {
   contour(data) {
     let contour = {
       _type: "contour",
+      id: uuidv4(),
       closed: true,
       points: []
     };
@@ -56,6 +57,7 @@ class Ufo {
     data.point.forEach(point => {
       contour.points.push({
         _type: "point",
+        id: uuidv4(),
         x: R.path(["$", "x"], point),
         y: R.path(["$", "y"], point),
         type: R.path(["$", "type"], point) || "offcurve"
@@ -74,6 +76,7 @@ class Ufo {
 
       contour.points.unshift({
         _type: "point",
+        id: uuidv4(),
         x: contour.points[contour.points.length - 1].x,
         y: contour.points[contour.points.length - 1].y,
         type: "move"
@@ -88,6 +91,7 @@ class Ufo {
   outline(data) {
     let outline = {
       _type: "outline",
+      id: uuidv4(),
       contours: []
     };
 
@@ -101,6 +105,7 @@ class Ufo {
   glyph(name, filename) {
     let glyph = {
       _type: "glyph",
+      id: uuidv4(),
       width: 0,
       height: 0,
       unicode: 0,
@@ -108,12 +113,12 @@ class Ufo {
     };
 
     if (!name) {
-      throw `UFO glyph has no name – check contents.plist`;
+      throw new Error(`UFO glyph has no name – check contents.plist`);
     }
     glyph.name = name;
 
     if (!filename) {
-      throw `UFO glyph has no filename – check contents.plist`;
+      throw new Error(`UFO glyph has no filename – check contents.plist`);
     }
 
     let data = this.reader.getGlyph(filename);
@@ -121,9 +126,11 @@ class Ufo {
 
     // check format
     if (data.glyph.$.format !== "1") {
-      throw `UFO glyph is not in format Verson 1 – ${filename}:${
-        data.glyph.$.format
-      }`;
+      throw new Error(
+        `UFO glyph is not in format Verson 1 – ${filename}:${
+          data.glyph.$.format
+        }`
+      );
     }
 
     glyph.width = parseFloat(
@@ -149,6 +156,7 @@ class Ufo {
 
     let font = {
       _type: "font",
+      id: uuidv4(),
       glyphs: []
     };
 

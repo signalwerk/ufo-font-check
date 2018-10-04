@@ -28,9 +28,9 @@ class App extends Component {
         <p className="App-intro">
           <button onClick={e => this.onClick(e)}>RUN</button>
           To get started, edit <code>src/App.js</code> and save to reload.
-          <Drop />
-          <Glyph glyph={glyph} />
         </p>
+        <Drop />
+          <Glyph glyph={glyph} />
       </div>
     );
   }
