@@ -58,35 +58,48 @@ class Glyph extends Component {
 
               <path
                 className="right"
-                d={`M${glyph.width} ${fontinfo.descender}, L${glyph.width} ${fontinfo.ascender}`}
-
+                d={`M${glyph.width} ${fontinfo.descender}, L${glyph.width} ${
+                  fontinfo.ascender
+                }`}
                 fill="none"
               />
 
               <path
                 className="ascender"
-                d={`M0 ${fontinfo.ascender}, L${glyph.width} ${fontinfo.ascender}`}
+                d={`M0 ${fontinfo.ascender}, L${glyph.width} ${
+                  fontinfo.ascender
+                }`}
                 fill="none"
               />
 
               <path
                 className="capheight"
-                d={`M0 ${fontinfo.capHeight}, L${glyph.width} ${fontinfo.capHeight}`}
+                d={`M0 ${fontinfo.capHeight}, L${glyph.width} ${
+                  fontinfo.capHeight
+                }`}
                 fill="none"
               />
 
               <path
                 className="descender"
-                d={`M0 ${fontinfo.descender}, L${glyph.width} ${fontinfo.descender}`}
+                d={`M0 ${fontinfo.descender}, L${glyph.width} ${
+                  fontinfo.descender
+                }`}
                 fill="none"
               />
               <path
                 className="xheight"
-                d={`M0 ${fontinfo.xHeight}, L${glyph.width} ${fontinfo.xHeight}`}
+                d={`M0 ${fontinfo.xHeight}, L${glyph.width} ${
+                  fontinfo.xHeight
+                }`}
                 fill="none"
               />
 
-              <path className="baseline" d={`M0 0, L${glyph.width} 0`} fill="none" />
+              <path
+                className="baseline"
+                d={`M0 0, L${glyph.width} 0`}
+                fill="none"
+              />
 
               {glyph.outlines.map(outline => (
                 <Outline key={outline.id} outline={outline} />

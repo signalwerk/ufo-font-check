@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import Point from "../Point";
+import Points from "../Points";
 import "./styles.css";
 
 let contourToSvg = contour => {
@@ -35,15 +35,6 @@ let contourToSvg = contour => {
   return path.join(" ");
 };
 
-let points = contour => {
-  let points = [];
-  contour.points.forEach(point => {
-    points.push(<Point point={point} />);
-  });
-
-  return points;
-};
-
 class Outline extends Component {
   render() {
     let { outline } = this.props;
@@ -55,7 +46,15 @@ class Outline extends Component {
           d={outline.contours.map(contour => contourToSvg(contour)).join(" ")}
         />
 
-        <g>{outline.contours.map(contour => points(contour))}</g>
+        <g>
+          {outline.contours.map((contour, index) => (
+            <Fragment>
+              <g>
+                <Points points={contour.points} label={`${index}`} />
+              </g>
+            </Fragment>
+          ))}
+        </g>
       </Fragment>
     );
   }

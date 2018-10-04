@@ -64,19 +64,18 @@ class Ufo {
       });
     });
 
-// UFO notates open path with a first move-point
+    // UFO notates open path with a first move-point
     if (contour.points[0].type === "move") {
       contour.closed = false;
-}
+    }
 
-      // move first element to the end
-      if (
-        contour.points[0].type === "curve" ||
-        contour.points[0].type === "line"
-
-      ) {
-        contour.points.push(contour.points.shift())
-      }
+    // move first element to the end
+    if (
+      contour.points[0].type === "curve" ||
+      contour.points[0].type === "line"
+    ) {
+      contour.points.push(contour.points.shift());
+    }
 
     // cycle the offcurve-points of the end to the beginning
     // because of the strange UFO-notation
@@ -95,7 +94,6 @@ class Ufo {
         y: contour.points[contour.points.length - 1].y,
         type: "move"
       });
-
     }
 
     return contour;
@@ -175,7 +173,6 @@ class Ufo {
       descender: data.descender,
       xHeight: data.xHeight,
       upm: data.unitsPerEm
-
     };
     console.log("fontinfo - out", fontinfo);
 

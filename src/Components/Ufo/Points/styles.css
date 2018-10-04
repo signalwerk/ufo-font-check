@@ -4,3 +4,7 @@
   stroke-width: 1;
   vector-effect: non-scaling-stroke;
 }
+
+.contour--move {
+  font: bold 40px sans-serif;
+}
