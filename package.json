@@ -1,0 +1,21 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "html5-file-selector": "^2.1.0",
+    "plist": "^3.0.1",
+    "ramda": "^0.25.0",
+    "react": "^16.5.1",
+    "react-dom": "^16.5.1",
+    "react-dropzone": "^5.1.0",
+    "react-scripts": "1.1.5",
+    "xml2js": "^0.4.19"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
