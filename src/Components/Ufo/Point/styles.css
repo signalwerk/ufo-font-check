@@ -1,0 +1,6 @@
+.Point--path {
+  fill: rgb(193, 193, 193);
+  stroke: black;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}

@@ -64,11 +64,25 @@ class Ufo {
       });
     });
 
+// UFO notates open path with a first move-point
+    if (contour.points[0].type === "move") {
+      contour.closed = false;
+}
+
+      // move first element to the end
+      if (
+        contour.points[0].type === "curve" ||
+        contour.points[0].type === "line"
+
+      ) {
+        contour.points.push(contour.points.shift())
+      }
+
     // cycle the offcurve-points of the end to the beginning
     // because of the strange UFO-notation
-    while (contour.points[contour.points.length - 1].type === "offcurve") {
-      contour.points.unshift(contour.points.pop());
-    }
+    // while (contour.points[contour.points.length - 1].type === "offcurve") {
+    //   contour.points.unshift(contour.points.pop());
+    // }
 
     // now we make sure we always have a move point at the beginning
     if (contour.points[0].type !== "move") {
@@ -81,8 +95,7 @@ class Ufo {
         y: contour.points[contour.points.length - 1].y,
         type: "move"
       });
-    } else {
-      contour.closed = false;
+
     }
 
     return contour;
@@ -150,13 +163,35 @@ class Ufo {
     return glyph;
   }
 
+  fontinfo(data) {
+    console.log("fontinfo - in", data);
+
+    let fontinfo = {
+      _type: "fontinfo",
+      id: uuidv4(),
+      ascender: data.ascender,
+      capHeight: data.capHeight,
+      copyright: data.copyright,
+      descender: data.descender,
+      xHeight: data.xHeight,
+      upm: data.unitsPerEm
+
+    };
+    console.log("fontinfo - out", fontinfo);
+
+    return fontinfo;
+  }
+
   font() {
     // now use the `parse()` and `build()` functions
     var contents = this.reader.getContents();
 
+    var fontinfo = this.fontinfo(this.reader.getFontinfo());
+
     let font = {
       _type: "font",
       id: uuidv4(),
+      fontinfo,
       glyphs: []
     };
 

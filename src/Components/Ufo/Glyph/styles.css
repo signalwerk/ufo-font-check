@@ -2,6 +2,21 @@
   width: 500px;
 }
 
+.upm {
+  fill: rgba(0, 0, 255, .1);
+  stroke-width: 3;
+  stroke: rgb(0, 0, 0);
+}
+
+.xheight,
+.descender,
+.capheight,
+.ascender {
+  stroke: rgb(0, 167, 244);
+
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
 .baseline {
   stroke: red;
   stroke-width: 1;

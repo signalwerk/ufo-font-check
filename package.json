@@ -10,6 +10,7 @@
     "react-dom": "^16.5.1",
     "react-dropzone": "^5.1.0",
     "react-scripts": "1.1.5",
+    "uuid": "^3.3.2",
     "xml2js": "^0.4.19"
   },
   "scripts": {

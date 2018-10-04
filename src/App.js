@@ -17,6 +17,7 @@ class App extends Component {
     let ufo = new UFO();
     ufo.parse();
     let glyph = ufo.state.font.glyphs[0];
+    let fontinfo = ufo.state.font.fontinfo;
     console.log("-- glyph", glyph);
 
     return (
@@ -30,7 +31,7 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <Drop />
-          <Glyph glyph={glyph} />
+        <Glyph glyph={glyph} fontinfo={fontinfo} />
       </div>
     );
   }
