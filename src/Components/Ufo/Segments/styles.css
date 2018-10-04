@@ -1,0 +1,6 @@
+.Segment--path {
+  fill: rgb(193, 193, 193);
+  stroke: red;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}

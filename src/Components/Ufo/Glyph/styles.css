@@ -3,29 +3,29 @@
 }
 
 .upm {
-  fill: rgba(0, 0, 255, 0.1);
+  fill: rgba(0, 0, 0, 0.02);
   stroke-width: 3;
-  stroke: rgb(0, 0, 0);
+  stroke: rgba(0, 0, 0, 0.2);
 }
 
 .xheight,
 .descender,
 .capheight,
 .ascender {
-  stroke: rgb(0, 167, 244);
-
+  stroke: rgba(0, 167, 244, .4);
   stroke-width: 1;
   vector-effect: non-scaling-stroke;
 }
+
 .baseline {
-  stroke: red;
+  stroke: rgba(0, 0, 0, .7);
   stroke-width: 1;
   vector-effect: non-scaling-stroke;
 }
 
 .right,
 .left {
-  stroke: gray;
+  stroke: rgba(200, 200, 200, .7);
   stroke-width: 1;
   vector-effect: non-scaling-stroke;
 }

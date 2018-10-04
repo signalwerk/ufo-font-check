@@ -1,10 +1,31 @@
+.contour--text-bg {
+  fill: rgba(255, 255, 255, 0.85);
+}
+
+.contour--text {
+  fill: rgba(255, 35, 229, 0.7);
+  font: bold 40px sans-serif;
+}
+
 .Point--path {
-  fill: rgb(193, 193, 193);
-  stroke: black;
+  fill: var(--color-path-helper);
+  stroke: var(--color-path-helper);
   stroke-width: 1;
   vector-effect: non-scaling-stroke;
 }
 
-.contour--move {
-  font: bold 40px sans-serif;
+.Point--path-move {
+  fill: rgba(255, 35, 229, 0.7);
+  stroke: none;
+}
+
+.Point--path-curve {
+  fill: white;
+}
+
+.Points--handels {
+  fill: none;
+  stroke: var(--color-path-helper);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
 }

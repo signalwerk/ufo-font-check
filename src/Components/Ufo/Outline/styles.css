@@ -1,6 +1,32 @@
+.Outline--fill {
+  fill: rgb(218, 218, 218);
+}
+
 .Outline--path {
-  fill: rgb(193, 193, 193);
+  fill: none;
   stroke: black;
-  stroke-width: 1;
+  stroke-width: 0.7;
   vector-effect: non-scaling-stroke;
+}
+
+.Segment--path {
+  fill: none;
+  stroke-width: 6;
+  vector-effect: non-scaling-stroke;
+}
+
+.Segment--path-curve {
+  stroke: rgb(0, 128, 0);
+}
+
+.Segment--path-curve:nth-child(odd) {
+  stroke: rgba(255, 220, 0, 1);
+}
+
+.Segment--path-line {
+  stroke: rgb(71, 95, 255);
+}
+
+.Segment--path-line:nth-child(odd) {
+  stroke: rgb(198, 69, 84);
 }

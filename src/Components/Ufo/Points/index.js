@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 
 import "./styles.css";
 
-let size = 10;
+let size = 18;
 
 let renderPoint = point => {
   let { x, y, label } = point;
@@ -12,7 +12,7 @@ let renderPoint = point => {
     case "move":
       return (
         <circle
-          className="Point--path"
+          className="Point--path Point--path-move"
           cx={x}
           cy={y}
           r={(size / 2) * scale * 3}
@@ -22,14 +22,19 @@ let renderPoint = point => {
       break;
     case "offcurve":
       return (
-        <circle className="Point--path" cx={x} cy={y} r={(size / 2) * scale} />
+        <circle
+          className="Point--path Point--path-offcurve"
+          cx={x}
+          cy={y}
+          r={(size / 2) * scale}
+        />
       );
 
       break;
     case "curve":
       return (
         <rect
-          className="Point--path"
+          className="Point--path Point--path-curve"
           x={x - (size * scale) / 2}
           y={y - (size * scale) / 2}
           width={size * scale}
@@ -58,7 +63,6 @@ let renderPoint = point => {
 class Point extends Component {
   render() {
     let { point } = this.props;
-    console.log("...point", point);
     return <Fragment>{renderPoint(point)}</Fragment>;
   }
 }
@@ -79,20 +83,17 @@ let renderPoints = (points, label) => {
       let secondLastPoint = getItem(points, index - 2);
       let thirdLastPoint = getItem(points, index - 3);
 
-      console.log(`M${lastPoint.x} ${lastPoint.y}, L${point.x} ${point.y}`);
       tangents.push(
         <g>
           <path
-            className="baseline"
+            className="Points--handels"
             d={`M${lastPoint.x} ${lastPoint.y}, L${point.x} ${point.y}`}
-            fill="none"
           />
           <path
-            className="baseline"
+            className="Points--handels"
             d={`M${thirdLastPoint.x} ${thirdLastPoint.y}, L${
               secondLastPoint.x
             } ${secondLastPoint.y}`}
-            fill="none"
           />
         </g>
       );
@@ -105,7 +106,14 @@ let renderPoints = (points, label) => {
           x={0}
           y={0}
         >
-          <text x={15} y={-15} className="contour--move">{`${label}`}</text>
+          <circle className="contour--text-bg" cx={32} cy={-29} r={23} />
+
+          <text
+            text-anchor="middle"
+            x={32}
+            y={-15}
+            className="contour--text"
+          >{`${label}`}</text>
         </g>
       );
     }
@@ -119,7 +127,6 @@ let renderPoints = (points, label) => {
 class Points extends Component {
   render() {
     let { points, label } = this.props;
-    console.log("...points", points);
     return <Fragment>{renderPoints(points, label)}</Fragment>;
   }
 }

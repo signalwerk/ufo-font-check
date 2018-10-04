@@ -1,3 +1,7 @@
+:root {
+  --color-path-helper: rgb(58, 183, 255);
+}
+
 body {
   margin: 0;
   padding: 0;
