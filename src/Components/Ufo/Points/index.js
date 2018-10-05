@@ -5,7 +5,7 @@ import "./styles.css";
 let size = 18;
 
 let renderPoint = point => {
-  let { x, y, label } = point;
+  let { x, y } = point;
   let scale = 1;
 
   switch (point.type) {
@@ -19,7 +19,6 @@ let renderPoint = point => {
         />
       );
 
-      break;
     case "offcurve":
       return (
         <circle
@@ -30,7 +29,6 @@ let renderPoint = point => {
         />
       );
 
-      break;
     case "curve":
       return (
         <rect
@@ -42,7 +40,6 @@ let renderPoint = point => {
         />
       );
 
-      break;
     case "line":
       return (
         <rect
@@ -54,7 +51,6 @@ let renderPoint = point => {
         />
       );
 
-      break;
     default:
       throw new Error(`render error of point-type: ${point.type}`);
   }
@@ -68,7 +64,7 @@ class Point extends Component {
 }
 
 let getItem = (arr, i) => {
-  let index = parseInt(i);
+  let index = parseInt(i, 10);
 
   return index < 0 ? arr[arr.length + index] : arr[index];
 };

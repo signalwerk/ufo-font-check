@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import Drop from "./Components/Drop";
 import Preview from "./Components/Preview";
-import Glyph from "./Components/Ufo/Glyph";
 
 import { contents, gGlif, fontinfo } from "./lib/ufo/testufo.js";
 

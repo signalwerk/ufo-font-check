@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Dropzone from "react-dropzone";
 import { getDroppedOrSelectedFiles } from "html5-file-selector";
-import { contents, gGlif, fontinfo } from "../../lib/ufo/testufo.js";
 import UFO from "../../lib/ufo";
 
 // let readUploadedFileAsText =  async inputFile =>   {

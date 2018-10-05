@@ -4,17 +4,14 @@ import { ContourToSvg } from "../Outline";
 
 import "./styles.css";
 
-let size = 10;
-
 let getItem = (arr, i) => {
-  let index = parseInt(i);
+  let index = parseInt(i, 10);
 
   return index < 0 ? arr[arr.length + index] : arr[index];
 };
 
 let renderSegments = points => {
   let segments = [];
-  let pts = [];
 
   points.forEach((point, index) => {
     switch (point.type) {
@@ -45,6 +42,9 @@ let renderSegments = points => {
         );
 
         break;
+      default:
+        console.log("problem?");
+      // throw new Error(`render error of point-type: ${point.type}`);
     }
   });
 

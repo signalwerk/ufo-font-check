@@ -1,4 +1,3 @@
-import { contents, gGlif, fontinfo } from "./testufo.js";
 import plist from "plist";
 const xml2js = require("xml2js");
 const R = require("ramda");
