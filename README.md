@@ -1,9 +1,7 @@
-yarn start
+## UFO Check
+Check your UFO-Files online.
 
-
-
-
-Font
-  – glyph
-    – Outline
-      – Contour
+Not supported:
+* TrueType-Contours
+* Components
+* Many more...
