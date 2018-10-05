@@ -14,16 +14,35 @@ var parser = new xml2js.Parser({
   // emptyTag: {}
 });
 
-class UfoReader {
-  getContents() {
-    return plist.parse(contents);
-  }
-  getFontinfo() {
-    return plist.parse(fontinfo);
-  }
-  getGlyph(filename) {
-    var xml = gGlif;
+// class UfoReader {
+//   getContents() {
+//     return contents;
+//   }
+//   getFontinfo() {
+//     return fontinfo;
+//   }
+//   getGlyph(filename) {
+//     return gGlif;
+//     // return XML.parse(xml, { preserveAttributes: true });
+//   }
+// }
 
+async function asyncForEach(array, callback) {
+  for (let index = 0; index < array.length; index++) {
+    await callback(array[index], index, array);
+  }
+}
+
+class Ufo {
+  state = {
+    font: null
+  };
+
+  constructor(reader) {
+    this.reader = reader;
+  }
+
+  getGlyph(xml) {
     let data = null,
       error = null;
     parser.parseString(xml, (fail, result) => {
@@ -34,16 +53,6 @@ class UfoReader {
     return data;
 
     // return XML.parse(xml, { preserveAttributes: true });
-  }
-}
-
-class Ufo {
-  state = {
-    font: null
-  };
-
-  constructor() {
-    this.reader = new UfoReader();
   }
 
   contour(data) {
@@ -106,21 +115,28 @@ class Ufo {
       contours: []
     };
 
-    data.contour.forEach(contour => {
-      outline.contours.push(this.contour(contour));
-    });
+    if (data.contour) {
+      console.log("!!!push contour");
+      data.contour.forEach(contour => {
+        outline.contours.push(this.contour(contour));
+      });
+    } else {
+      console.log("!!!data.contour", data.contour);
+    }
+    //
 
     return outline;
   }
 
-  glyph(name, filename) {
+  async glyph(name, filename) {
     let glyph = {
       _type: "glyph",
       id: uuidv4(),
       width: 0,
       height: 0,
       unicode: 0,
-      outlines: []
+      outlines: [],
+      name: ''
     };
 
     if (!name) {
@@ -132,8 +148,7 @@ class Ufo {
       throw new Error(`UFO glyph has no filename – check contents.plist`);
     }
 
-    let data = this.reader.getGlyph(filename);
-    console.log("XML", data);
+    let data = this.getGlyph(await this.reader.getGlyph(filename));
 
     // check format
     if (data.glyph.$.format !== "1") {
@@ -162,8 +177,6 @@ class Ufo {
   }
 
   fontinfo(data) {
-    console.log("fontinfo - in", data);
-
     let fontinfo = {
       _type: "fontinfo",
       id: uuidv4(),
@@ -174,16 +187,15 @@ class Ufo {
       xHeight: data.xHeight,
       upm: data.unitsPerEm
     };
-    console.log("fontinfo - out", fontinfo);
 
     return fontinfo;
   }
 
-  font() {
+  async font() {
     // now use the `parse()` and `build()` functions
-    var contents = this.reader.getContents();
+    var contents = plist.parse(await this.reader.getContents());
 
-    var fontinfo = this.fontinfo(this.reader.getFontinfo());
+    var fontinfo = this.fontinfo(plist.parse(await this.reader.getFontinfo()));
 
     let font = {
       _type: "font",
@@ -192,17 +204,16 @@ class Ufo {
       glyphs: []
     };
 
-    Object.keys(contents).forEach(key => {
+    await asyncForEach(Object.keys(contents), async key => {
       let item = contents[key];
-      font.glyphs.push(this.glyph(key, item));
+      font.glyphs.push(await this.glyph(key, item));
     });
 
     return font;
   }
 
-  parse() {
-    this.state.font = this.font();
-    console.dir(this.state.font);
+  async parse() {
+    this.state.font = await this.font();
   }
 }
 

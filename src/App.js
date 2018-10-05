@@ -2,36 +2,67 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Drop from "./Components/Drop";
+import Preview from "./Components/Preview";
 import Glyph from "./Components/Ufo/Glyph";
+
+import { contents, gGlif, fontinfo } from "./lib/ufo/testufo.js";
 
 import UFO from "./lib/ufo";
 
+class UfoReader {
+  async getContents() {
+    return contents;
+  }
+  async getFontinfo() {
+    return fontinfo;
+  }
+  async getGlyph(filename) {
+    return gGlif;
+    // return XML.parse(xml, { preserveAttributes: true });
+  }
+}
+
+let reader = new UfoReader();
+
 class App extends Component {
-  onClick(e) {
-    console.log("-- start");
-    let ufo = new UFO();
-    ufo.parse();
+  constructor() {
+    super();
+    this.load();
+  }
+
+  async load(files) {
+    let ufo = new UFO(reader);
+    await ufo.parse();
+    let glyph = ufo.state.font.glyphs[0];
+    let fontinfo = ufo.state.font.fontinfo;
+
+    this.setState({
+      glyph,
+      fontinfo
+    });
   }
 
   render() {
-    let ufo = new UFO();
-    ufo.parse();
-    let glyph = ufo.state.font.glyphs[0];
-    let fontinfo = ufo.state.font.fontinfo;
-    console.log("-- glyph", glyph);
+    if(!this.state) {
+      return null
+    }
+    let { glyph, fontinfo } = this.state;
+    if (!glyph || !fontinfo) {
+      return null;
+    }
 
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">UFO Viewer</h1>
+          <h3 className="">Stefan Huber</h3>
         </header>
-        <p className="App-intro">
-          <button onClick={e => this.onClick(e)}>RUN</button>
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Drop />
+        <div className="App-preview">
+        <Preview />
+        </div>
+        {/*
         <Glyph glyph={glyph} fontinfo={fontinfo} />
+        */}
       </div>
     );
   }

@@ -54,7 +54,6 @@ let renderSegments = points => {
 class Segments extends Component {
   render() {
     let { points } = this.props;
-    console.log("render segments");
     return <Fragment>{renderSegments(points)}</Fragment>;
   }
 }

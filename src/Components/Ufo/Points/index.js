@@ -109,7 +109,7 @@ let renderPoints = (points, label) => {
           <circle className="contour--text-bg" cx={32} cy={-29} r={23} />
 
           <text
-            text-anchor="middle"
+            textAnchor="middle"
             x={32}
             y={-15}
             className="contour--text"

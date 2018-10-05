@@ -24,8 +24,6 @@ class Glyph extends Component {
 
     return (
       <div className="Glyph--root">
-        <p>yOffset: {yOffset}</p>
-        <p>maxHeight: {maxHeight}</p>
 
         <svg className="Glyph--svg" viewBox={`0 0 ${upm} ${upm}`}>
           {/*
