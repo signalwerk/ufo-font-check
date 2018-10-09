@@ -99,7 +99,7 @@ class Preview extends Component {
 
                   if (pointA.type !== pointB.type) {
                     glyphC.error.push(
-                      "Typoe of Points are not compatible. Check outline."
+                      "Type of Points are not compatible. Check outline."
                     );
                     return;
                   } else {
