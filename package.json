@@ -2,7 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://signalwerk.github.io/ufo-check/",
+  "homepage": "https://signalwerk.github.io/ufo-font-check/",
   "dependencies": {
     "html5-file-selector": "^2.1.0",
     "plist": "^3.0.1",

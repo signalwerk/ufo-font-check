@@ -3,11 +3,11 @@ node_js: stable
 install:
   - npm ci
 script:
-  - npm run build
-deploy:
-  provider: pages
-  local-dir: ./build
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  on:
-    branch: master
+  - bash ./ci/gh-pages.sh
+env:
+  global:
+  - COMMIT_AUTHOR_EMAIL: "sh@signalwerk.ch"
+  - DEPLOY_DIR: "build"
+branches:
+  only:
+  - master
