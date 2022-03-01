@@ -5,7 +5,7 @@
   "homepage": "https://signalwerk.github.io/ufo-font-check/",
   "dependencies": {
     "html5-file-selector": "^2.1.0",
-    "plist": "^3.0.1",
+    "plist": "^3.0.4",
     "ramda": "^0.25.0",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
